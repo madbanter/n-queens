@@ -122,7 +122,6 @@
 
     // test if any columns on this board contain conflicts
     hasAnyColConflicts: function() {
-      console.log(this);
       for (let i = 0; i < this.get('n'); i++) {
         if (this.hasColConflictAt(i)) {
           return true;
