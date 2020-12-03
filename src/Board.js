@@ -120,7 +120,6 @@
     //
     // test if a specific column on this board contains a conflict
     hasColConflictAt: function(colIndex) {
-      // define sum
       var sum = 0;
       // iterate over the matrix
       for (let i = 0; i < this.get('n'); i++) {
@@ -160,25 +159,17 @@
     //
     // test if a specific major diagonal on this board contains a conflict
     hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow) {
-      //iterate over the first row
+
       for (let rowIdx = 0; rowIdx < this.get('n') - 1; rowIdx++) {
-        //for each square start a sum
         let sum = 0;
-        //define a column based on input
         let colIdx = majorDiagonalColumnIndexAtFirstRow;
-        //currentHouse = this.get(rowIdx)[colIdx]
-        //define a new iteration starting from current i
         for (let j = rowIdx; j < this.get('n'); j++) {
-          //if the square has a value of 1
           if (this.get(j)[colIdx] > 0) {
-            //add 1 to the sum
             sum++;
           }
-          //check if the sum is more than 1 return true
           if (sum > 1) {
             return true;
           }
-          // increment column
           colIdx++;
         }
       }
@@ -205,13 +196,44 @@
     //
     // test if a specific minor diagonal on this board contains a conflict
     hasMinorDiagonalConflictAt: function(minorDiagonalColumnIndexAtFirstRow) {
-      return false; // fixme
+      //iterate over the first row
+      for (let rowIdx = 0; rowIdx < this.get('n'); rowIdx++) {
+        //for each square start a sum
+        let sum = 0;
+        //define a column based on input
+        let colIdx = minorDiagonalColumnIndexAtFirstRow;
+        //currentHouse = this.get(rowIdx)[colIdx]
+        //define a new iteration starting from current i
+        for (let j = rowIdx; j < this.get('n'); j++) {
+          //if the square has a value of 1
+          if (this.get(j)[colIdx] > 0) {
+            //add 1 to the sum
+            sum++;
+          }
+          //check if the sum is more than 1 return true
+          if (sum > 1) {
+            return true;
+          }
+          // increment column
+
+          colIdx--;
+        }
+      }
+      return false;
     },
 
     // test if any minor diagonals on this board contain conflicts
     hasAnyMinorDiagonalConflicts: function() {
+      //iterate over the coloumn indexes from 0 to n-1
+      for (let i = this.get('n') - 1; i > 0; i--) {
+        //for each one call hasMajorDiagonalConflictAt on index
+        if (this.hasMinorDiagonalConflictAt(i)) {
+          //if that call return true
+          return true;
+        }
+      }
       return false; // fixme
-    }
+    },
 
     /*--------------------  End of Helper Functions  ---------------------*/
 
