@@ -62,14 +62,14 @@
     },
 
 
-/*
+    /*
          _             _     _
      ___| |_ __ _ _ __| |_  | |__   ___ _ __ ___ _
     / __| __/ _` | '__| __| | '_ \ / _ \ '__/ _ (_)
     \__ \ || (_| | |  | |_  | | | |  __/ | |  __/_
     |___/\__\__,_|_|   \__| |_| |_|\___|_|  \___(_)
 
- */
+    */
     /*=========================================================================
     =                 TODO: fill in these Helper Functions                    =
     =========================================================================*/
@@ -79,11 +79,37 @@
     //
     // test if a specific row on this board contains a conflict
     hasRowConflictAt: function(rowIndex) {
+      let sum = 0;
+      // iterate over row
+      let row = this.get(rowIndex);
+      for (let i = 0; i < this.get('n'); i++) {
+        // sum value at each space
+        sum += row[i];
+        // if sum > 1
+        if (sum > 1) {
+          // return true
+          return true;
+        }
+      }
       return false; // fixme
     },
 
     // test if any rows on this board contain conflicts
     hasAnyRowConflicts: function() {
+      //console.log('this', this);
+      //define matrix
+      // var matrix = this.attributes;
+      //console.log(Array.isArray(matrix));
+      // iterate over all rows
+      for (let i = 0; i < this.get('n'); i++) {
+        // check row for rowconflict
+        //let row = this.get(i);
+        // if row has row conflict
+        if (this.hasRowConflictAt(i)) {
+          return true;
+          // return true
+        }
+      }
       return false; // fixme
     },
 
@@ -94,6 +120,11 @@
     //
     // test if a specific column on this board contains a conflict
     hasColConflictAt: function(colIndex) {
+      // define matrix
+      // iterate over the matrix
+      // sum
+      // if current row at colIndex is not 0
+        // return true
       return false; // fixme
     },
 
