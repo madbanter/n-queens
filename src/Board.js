@@ -80,34 +80,21 @@
     // test if a specific row on this board contains a conflict
     hasRowConflictAt: function(rowIndex) {
       let sum = 0;
-      // iterate over row
       let row = this.get(rowIndex);
       for (let i = 0; i < this.get('n'); i++) {
-        // sum value at each space
         sum += row[i];
-        // if sum > 1
         if (sum > 1) {
-          // return true
           return true;
         }
       }
-      return false; // fixme
+      return false;
     },
 
     // test if any rows on this board contain conflicts
     hasAnyRowConflicts: function() {
-      //console.log('this', this);
-      //define matrix
-      // var matrix = this.attributes;
-      //console.log(Array.isArray(matrix));
-      // iterate over all rows
       for (let i = 0; i < this.get('n'); i++) {
-        // check row for rowconflict
-        //let row = this.get(i);
-        // if row has row conflict
         if (this.hasRowConflictAt(i)) {
           return true;
-          // return true
         }
       }
       return false;
@@ -121,15 +108,11 @@
     // test if a specific column on this board contains a conflict
     hasColConflictAt: function(colIndex) {
       var sum = 0;
-      // iterate over the matrix
       for (let i = 0; i < this.get('n'); i++) {
-        // if value at current index is greater than 0
         var current = this.get(i);
         if (current[colIndex] > 0) {
-          // add it to sum
           sum += current[colIndex];
         }
-        // if sum > 1
         if (sum > 1) {
           return true;
         }
@@ -139,17 +122,13 @@
 
     // test if any columns on this board contain conflicts
     hasAnyColConflicts: function() {
-      //iterate over the coloumns
       console.log(this);
       for (let i = 0; i < this.get('n'); i++) {
-        //  for each col check hasColConflictAt
         if (this.hasColConflictAt(i)) {
-          //    if it is true
-          //      return true
           return true;
         }
       }
-      return false; // fixme
+      return false;
     },
 
 
@@ -178,15 +157,13 @@
 
     // test if any major diagonals on this board contain conflicts
     hasAnyMajorDiagonalConflicts: function() {
-      //iterate over the coloumn indexes from 0 to n-1
-      for (let i = 0; i < this.get('n')-1; i++) {
-        //for each one call hasMajorDiagonalConflictAt on index
+      for (let i = 0; i < this.get('n') - 1; i++) {
+
         if (this.hasMajorDiagonalConflictAt(i)) {
-          //if that call return true
           return true;
         }
       }
-      return false; // fixme
+      return false;
     },
 
 
@@ -196,26 +173,16 @@
     //
     // test if a specific minor diagonal on this board contains a conflict
     hasMinorDiagonalConflictAt: function(minorDiagonalColumnIndexAtFirstRow) {
-      //iterate over the first row
       for (let rowIdx = 0; rowIdx < this.get('n'); rowIdx++) {
-        //for each square start a sum
         let sum = 0;
-        //define a column based on input
         let colIdx = minorDiagonalColumnIndexAtFirstRow;
-        //currentHouse = this.get(rowIdx)[colIdx]
-        //define a new iteration starting from current i
         for (let j = rowIdx; j < this.get('n'); j++) {
-          //if the square has a value of 1
           if (this.get(j)[colIdx] > 0) {
-            //add 1 to the sum
             sum++;
           }
-          //check if the sum is more than 1 return true
           if (sum > 1) {
             return true;
           }
-          // increment column
-
           colIdx--;
         }
       }
@@ -224,15 +191,12 @@
 
     // test if any minor diagonals on this board contain conflicts
     hasAnyMinorDiagonalConflicts: function() {
-      //iterate over the coloumn indexes from 0 to n-1
-      for (let i = this.get('n') - 1; i > 0; i--) {
-        //for each one call hasMajorDiagonalConflictAt on index
+            for (let i = this.get('n') - 1; i > 0; i--) {
         if (this.hasMinorDiagonalConflictAt(i)) {
-          //if that call return true
           return true;
         }
       }
-      return false; // fixme
+      return false;
     },
 
     /*--------------------  End of Helper Functions  ---------------------*/
