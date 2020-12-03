@@ -110,7 +110,7 @@
           // return true
         }
       }
-      return false; // fixme
+      return false;
     },
 
 
@@ -120,16 +120,36 @@
     //
     // test if a specific column on this board contains a conflict
     hasColConflictAt: function(colIndex) {
-      // define matrix
+      // define sum
+      var sum = 0;
       // iterate over the matrix
-      // sum
-      // if current row at colIndex is not 0
-        // return true
-      return false; // fixme
+      for (let i = 0; i < this.get('n'); i++) {
+        // if value at current index is greater than 0
+        var current = this.get(i);
+        if (current[colIndex] > 0) {
+          // add it to sum
+          sum += current[colIndex];
+        }
+        // if sum > 1
+        if (sum > 1) {
+          return true;
+        }
+      }
+      return false;
     },
 
     // test if any columns on this board contain conflicts
     hasAnyColConflicts: function() {
+      //iterate over the coloumns
+      console.log(this);
+      for (let i = 0; i < this.get('n'); i++) {
+        //  for each col check hasColConflictAt
+        if (this.hasColConflictAt(i)) {
+          //    if it is true
+          //      return true
+          return true;
+        }
+      }
       return false; // fixme
     },
 
@@ -140,11 +160,41 @@
     //
     // test if a specific major diagonal on this board contains a conflict
     hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow) {
-      return false; // fixme
+      //iterate over the first row
+      for (let rowIdx = 0; rowIdx < this.get('n') - 1; rowIdx++) {
+        //for each square start a sum
+        let sum = 0;
+        //define a column based on input
+        let colIdx = majorDiagonalColumnIndexAtFirstRow;
+        //currentHouse = this.get(rowIdx)[colIdx]
+        //define a new iteration starting from current i
+        for (let j = rowIdx; j < this.get('n'); j++) {
+          //if the square has a value of 1
+          if (this.get(j)[colIdx] > 0) {
+            //add 1 to the sum
+            sum++;
+          }
+          //check if the sum is more than 1 return true
+          if (sum > 1) {
+            return true;
+          }
+          // increment column
+          colIdx++;
+        }
+      }
+      return false;
     },
 
     // test if any major diagonals on this board contain conflicts
     hasAnyMajorDiagonalConflicts: function() {
+      //iterate over the coloumn indexes from 0 to n-1
+      for (let i = 0; i < this.get('n')-1; i++) {
+        //for each one call hasMajorDiagonalConflictAt on index
+        if (this.hasMajorDiagonalConflictAt(i)) {
+          //if that call return true
+          return true;
+        }
+      }
       return false; // fixme
     },
 
