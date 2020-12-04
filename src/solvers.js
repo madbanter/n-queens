@@ -62,7 +62,7 @@ window.findNRooksSolution = function(n) {
     rooks +=1;
     console.log('rooks', rooks);
 
-  }
+  };
 
   //define row and col and set them to 0
   var row = 0;
@@ -84,7 +84,7 @@ window.findNRooksSolution = function(n) {
   for (var key in solution) {
     testArr.push(solution[key]);
   }
-  console.log(testArr);
+  console.log('testArr', testArr);
   return testArr;
 
 };
